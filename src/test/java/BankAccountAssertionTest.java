@@ -37,9 +37,18 @@ public class BankAccountAssertionTest {
 
     }
 
+    @Test
+    @DisplayName("Test set holder name")
     public void testHolderNameSet(){
         BankAccount bankAccount = new BankAccount(500,0);
-
+        bankAccount.setHolderName("Kamal");
+        assertNotNull(bankAccount.getHolderName());
     }
 
+    @Test
+    @DisplayName("Test that we can't withdraw below minimum")
+    public void testWithdrawBelowMinimum(){
+        BankAccount bankAccount = new BankAccount(500,-1000);
+        assertThrows(RuntimeException.class,()-> bankAccount.withdraw(2000));
+    }
 }
